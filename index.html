@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>教育死刑変換ツール</title>
+
+    <style>
+        body{
+            width: 1200px;
+            height: 800px;
+            margin: 0 auto;
+
+            font-family: "Yu Gothic";
+        }
+        main{
+            text-align: center;
+
+            border-radius: 10%;
+        }
+        .title{
+            font-size: 2em;
+        }
+
+        .change-btn{
+            background-color: white;
+            border: solid 1px #666;
+            cursor: pointer;
+            margin: 0.5%;
+        }
+
+        textarea{
+            resize: none;
+            width: 30em;
+            height: 10em;
+        }
+        textarea:focus,button:focus{
+            outline: 0;
+        }
+        button{
+            background-color: #6666;
+            width: 4em;
+            height: 2em;
+        }
+
+        #btn-text{
+            width: 10%;
+            height: 5%;
+
+            margin: 1em auto;
+            padding: 0.5em 1em;
+
+            display: block;
+            background-color: white;
+            border: solid 0.1em #666;
+
+            user-select: none;
+            cursor: pointer;
+        }
+        #btn-text:hover, .change-btn:hover{
+            background-color: #99999966;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h3 class="title">教育死刑変換ツール</h3>
+
+        <div id = "content">
+            <p style="margin: 0;">※□に入力後、変換を押すと指定された文字列に変換されます</p>
+            <label>
+                教育 = <input type="text" id="change-kyoiku">
+                死刑 = <input type="text" id="change-shikei">
+            </label>
+            <input type="submit" value="変換" class="change-btn" onclick="changeBtn()">
+        </div>
+
+        <div id="show-box">
+            <textarea id="text"></textarea>
+            
+        </div>
+        <div class="btns">
+            <p onclick="copyBtn()" id="btn-text">COPY</p>
+        </div>
+    </main>
+        
+        
+        <script>
+            //グローバル変数定義
+            const text = document.getElementById("text");
+            const btnText = document.getElementById("btn-text");
+            const shikeiChange = document.getElementById("change-shikei");
+            const kyoikuChange = document.getElementById("change-kyoiku");
+            
+            let x = "教育";
+            let y = "死刑";
+            
+            window.onload = showText();
+            
+            //文字列変更処理
+            function changeBtn(){
+                if(kyoikuChange.value.trim()){
+                    x = kyoikuChange.value;
+                }else{
+                    x = "教育";
+                }
+                if(shikeiChange.value.trim()){
+                    y = shikeiChange.value;                 
+                }else{
+                    y = "死刑";
+                }
+                showText();
+
+                btnText.innerHTML = "Copy"
+
+            }
+            
+            //コピー処理
+            function copyBtn(){
+                
+                text.select();
+                document.execCommand("Copy");
+
+                btnText.innerHTML = "Copied";
+            }
+
+            //出力処理
+            function showText(){
+
+                let textAll = x;
+
+                //x * 18;
+                //y * 9
+                //x * 18
+                for(let i = 0; i < 17; i++){
+                    textAll += x;
+                }
+                for(let i = 0; i < 9; i++){
+                    textAll += y;
+                }
+                for(let i = 0; i < 18; i++){
+                    textAll += x;
+                }
+
+                text.value = textAll;
+            }
+
+            function tips_func(){
+            alert('ルール説明！\n揃ったらうれしいね！以上！！');
+        }
+
+        </script>
+</body>
+</html>
